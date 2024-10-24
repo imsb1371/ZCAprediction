@@ -53,6 +53,8 @@ with col10:
     Cfrag = st.number_input('Coarse Fragments (Cfrag, %)', 0.0)
 with col11:
     BD = st.number_input('Bulk Density (BD, Tm-3)', 0.0)
+with col12:
+    CN = st.number_input('Carbon to Nitrogen Ratio (CN)', 0.0)
 
 # Fifth row for soil chemical properties
 col13, col14, col15 = st.columns(3)
@@ -72,10 +74,7 @@ with col17:
 with col18:
     pH_H2O = st.number_input('pH in H2O', 0.0)
 
-# Final chemical property
-col19, col20 = st.columns(2)
-with col19:
-    CN = st.number_input('Carbon to Nitrogen Ratio (CN)', 0.0)
+
 
 # Gather all inputs into a list to check how many are zero
 input_values = [FA, OM, RL, AR, MT, AWC, Clay, Silt, Sand, Cfrag, BD, Phosphorus,
@@ -177,9 +176,9 @@ if st.button('Run'):
 
 
         # Predict Zinc, Cadmium, and Arsenic
-        yhat1 = YY[0]
-        yhat2 = YY[1]
-        yhat3 = YY[2]
+        yhat1 = YY[:,0]
+        yhat2 = YY[:,1]
+        yhat3 = YY[:,2]
 
         # Convert predictions back to the original scale
         Zinc_real = (yhat1 + 1) * (80.0 - 0.0) * 0.5 + 0.0  # min=0, max=80 for Zinc
