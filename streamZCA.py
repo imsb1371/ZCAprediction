@@ -104,79 +104,86 @@ inputvec = np.array([FA_tval, OM_tval, RL_tval, AR_tval, MT_tval, AWC_tval, Clay
                      CN_tval])
 
 
+# Check for zeros
+zero_count = sum(1 for value in input_values if value == 0)
 
-# Load models and predict the outputs when the button is pressed
-if st.button('Run'):
-    ## load model
-    # model2 = joblib.load('SSE_RF.pkl')
+# Validation: If more than 5 inputs are zero, show a warning message
+if zero_count > 5:
+    st.error(f"Error: More than five input values are zero. Please provide valid inputs for at least 13 features.")
+else:
 
-
-    # load models from file
-    def load_all_models(n_models, Cobj):
-        all_models = list()
-        for i in range(n_models):
-            # define filename for this ensemble
-            filenamemod = 'CNNmodel_'+str(i+1)+'.h5'
-            ## load model
-            loadedmodel = load_model(filenamemod, custom_objects=Cobj)  # , custom_objects=Cobj
-            # add to list of members
-            all_models.append(loadedmodel)
-            # print('>loaded %s' % filename)
-            return all_models
-
-    # create stacked model input dataset as outputs from the ensemble
-    def stacked_dataset(members, inputX):
-        stackX = None
-        for model in members:
-            # make prediction
-            yhat = model.predict(inputX, verbose=0)
-            # stack predictions into [rows, members, probabilities]
-            if stackX is None:
-                stackX = yhat
-            else:
-                stackX = np.dstack((stackX, yhat))
-
-            # flatten predictions to [rows, members x probabilities]
-            newstackX = stackX.reshape((stackX.shape[0], stackX.shape[1]*stackX.shape[2]))
-
-            # print("Stacked dataset shape:", stackX.shape)
-            # print("Final stacked shape: ", newstackX.shape)
-            return newstackX
-
-    def stacked_prediction(members, inputX ):
-        # create dataset using ensemble
-        # stackedX = stacked_dataset(members, inputX)
-        # print(f'Stacked dataset shape: {stackedX.shape}')  # Debugging line
-        # print('stacked_prediction is called')  # Debugging line
-        # make a prediction
-        yhat = members[0].predict(inputX)
-        yhatpd = pd.DataFrame(yhat)
-
-        return yhat
-
-    n_members = 5
-    Cbij = {'mse': 'mean_squared_error'}
-    members = load_all_models(n_members, Cbij)
-
-    input_values = inputvec.reshape(1,inputvec.shape[0],1 ) # Assuming trainx is loaded
-    # YY = stacked_prediction(members, model2, input_values)
-    YY = stacked_prediction(members,  input_values)
+    # Load models and predict the outputs when the button is pressed
+    if st.button('Run'):
+        ## load model
+        # model2 = joblib.load('SSE_RF.pkl')
 
 
-    # Predict Zinc, Cadmium, and Arsenic
-    yhat1 = YY[:,0]
-    yhat2 = YY[:,1]
-    yhat3 = YY[:,2]
+        # load models from file
+        def load_all_models(n_models, Cobj):
+            all_models = list()
+            for i in range(n_models):
+                # define filename for this ensemble
+                filenamemod = 'CNNmodel_'+str(i+1)+'.h5'
+                ## load model
+                loadedmodel = load_model(filenamemod, custom_objects=Cobj)  # , custom_objects=Cobj
+                # add to list of members
+                all_models.append(loadedmodel)
+                # print('>loaded %s' % filename)
+                return all_models
 
-    # Convert predictions back to the original scale
-    Zinc_real = (yhat1 + 1) * (80.0 - 0.0) * 0.5 + 0.0  # min=0, max=80 for Zinc
-    Cadmium_real = (yhat2 + 1) * (1.4 - 0.0) * 0.5 + 0.0  # min=0, max=1.4 for Cadmium
-    Arsenic_real = (yhat3 + 1) * (10.0 - 0.0) * 0.5 + 0.0  # min=0, max=10 for Arsenic
+        # create stacked model input dataset as outputs from the ensemble
+        def stacked_dataset(members, inputX):
+            stackX = None
+            for model in members:
+                # make prediction
+                yhat = model.predict(inputX, verbose=0)
+                # stack predictions into [rows, members, probabilities]
+                if stackX is None:
+                    stackX = yhat
+                else:
+                    stackX = np.dstack((stackX, yhat))
 
-    # Display predictions
-    st.write("Zinc (mg/kg): ", np.round(Zinc_real, decimals=4))
-    st.write("Cadmium (mg/kg): ", np.round(Cadmium_real, decimals=4))
-    st.write("Arsenic (mg/kg): ", np.round(Arsenic_real, decimals=4))
+                # flatten predictions to [rows, members x probabilities]
+                newstackX = stackX.reshape((stackX.shape[0], stackX.shape[1]*stackX.shape[2]))
+
+                # print("Stacked dataset shape:", stackX.shape)
+                # print("Final stacked shape: ", newstackX.shape)
+                return newstackX
+
+        def stacked_prediction(members, inputX ):
+            # create dataset using ensemble
+            # stackedX = stacked_dataset(members, inputX)
+            # print(f'Stacked dataset shape: {stackedX.shape}')  # Debugging line
+            # print('stacked_prediction is called')  # Debugging line
+            # make a prediction
+            yhat = members[0].predict(inputX)
+            yhatpd = pd.DataFrame(yhat)
+
+            return yhat
+
+        n_members = 5
+        Cbij = {'mse': 'mean_squared_error'}
+        members = load_all_models(n_members, Cbij)
+
+        input_values = inputvec.reshape(1,inputvec.shape[0],1 ) # Assuming trainx is loaded
+        # YY = stacked_prediction(members, model2, input_values)
+        YY = stacked_prediction(members,  input_values)
+
+
+        # Predict Zinc, Cadmium, and Arsenic
+        yhat1 = YY[:,0]
+        yhat2 = YY[:,1]
+        yhat3 = YY[:,2]
+
+        # Convert predictions back to the original scale
+        Zinc_real = (yhat1 + 1) * (80.0 - 0.0) * 0.5 + 0.0  # min=0, max=80 for Zinc
+        Cadmium_real = (yhat2 + 1) * (1.4 - 0.0) * 0.5 + 0.0  # min=0, max=1.4 for Cadmium
+        Arsenic_real = (yhat3 + 1) * (10.0 - 0.0) * 0.5 + 0.0  # min=0, max=10 for Arsenic
+
+        # Display predictions
+        st.write("Zinc (mg/kg): ", np.round(Zinc_real, decimals=4))
+        st.write("Cadmium (mg/kg): ", np.round(Cadmium_real, decimals=4))
+        st.write("Arsenic (mg/kg): ", np.round(Arsenic_real, decimals=4))
 
 
 filename7 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture3.PNG'
