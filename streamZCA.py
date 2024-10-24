@@ -184,11 +184,15 @@ if st.button('Run'):
         Zinc_real = (yhat1 + 1) * (80.0 - 0.0) * 0.5 + 0.0  # min=0, max=80 for Zinc
         Cadmium_real = (yhat2 + 1) * (1.4 - 0.0) * 0.5 + 0.0  # min=0, max=1.4 for Cadmium
         Arsenic_real = (yhat3 + 1) * (10.0 - 0.0) * 0.5 + 0.0  # min=0, max=10 for Arsenic
-
+        # Display predictions in a single row using columns
+        col19, col20, col21 = st.columns(3)
         # Display predictions
-        st.write("Zinc (mg/kg): ", np.round(abs(Zinc_real), decimals=4))
-        st.write("Cadmium (mg/kg): ", np.round(abs(Cadmium_real), decimals=4))
-        st.write("Arsenic (mg/kg): ", np.round(abs(Arsenic_real), decimals=4))
+        with col19:
+            st.write("Zinc (mg/kg): ", np.round(abs(Zinc_real), decimals=4))
+        with col20:
+            st.write("Cadmium (mg/kg): ", np.round(abs(Cadmium_real), decimals=4))
+        with col21:
+            st.write("Arsenic (mg/kg): ", np.round(abs(Arsenic_real), decimals=4))
 
 
 filename7 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture3.PNG'
