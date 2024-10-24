@@ -201,12 +201,12 @@ filename8 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads
 col22, col23, col24 = st.columns(3)
 with col22:
     with st.container():
-        st.header("Developer:")
+        st.markdown("<h5>Developer:</h5>", unsafe_allow_html=True)
         st.image(filename8)
 
 with col24:
     with st.container():
-        st.header("Supervisor:")
+        st.markdown("<h5>Supervisor:</h5>", unsafe_allow_html=True)
         st.image(filename7) 
 
 
