@@ -198,13 +198,13 @@ if st.button('Run'):
 filename7 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture3.PNG'
 filename8 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture4.PNG'
 
-col22, col23, col24 = st.columns(3)
+col22, col23 = st.columns(2)
 with col22:
     with st.container():
         st.markdown("<h5>Developer:</h5>", unsafe_allow_html=True)
         st.image(filename8)
 
-with col24:
+with col23:
     with st.container():
         st.markdown("<h5>Supervisor:</h5>", unsafe_allow_html=True)
         st.image(filename7) 
