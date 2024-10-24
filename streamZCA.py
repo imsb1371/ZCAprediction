@@ -177,9 +177,10 @@ if st.button('Run'):
 
 
     # Predict Zinc, Cadmium, and Arsenic
-    yhat1 = YY[:,0]
-    yhat2 = YY[:,1]
-    yhat3 = YY[:,2]
+    st.write(YY.shape)
+    yhat1 = YY[0]
+    yhat2 = YY[1]
+    yhat3 = YY[2]
 
     # Convert predictions back to the original scale
     Zinc_real = (yhat1 + 1) * (80.0 - 0.0) * 0.5 + 0.0  # min=0, max=80 for Zinc
