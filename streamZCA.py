@@ -111,16 +111,18 @@ inputvec = np.array([FA_tval, OM_tval, RL_tval, AR_tval, MT_tval, AWC_tval, Clay
 # Check for zeros
 zero_count = sum(1 for value in input_values if value == 0)
 
-# Validation: If more than 5 inputs are zero, show a warning message
-if zero_count > 5:
-    st.error(f"Error: More than five input values are zero. Please provide valid inputs for at least 13 features.")
-else:
 
-    # Load models and predict the outputs when the button is pressed
-    if st.button('Run'):
+
+# Load models and predict the outputs when the button is pressed
+if st.button('Run'):
+
+     ## Validation: If more than 5 inputs are zero, show a warning message
+    if zero_count > 5:
+        st.error(f"Error: More than five input values are zero. Please provide valid inputs for at least 13 features.")
+    else:
+
         ## load model
         # model2 = joblib.load('SSE_RF.pkl')
-
 
         # load models from file
         def load_all_models(n_models, Cobj):
@@ -174,20 +176,20 @@ else:
         YY = stacked_prediction(members,  input_values)
 
 
-        # Predict Zinc, Cadmium, and Arsenic
-        yhat1 = YY[:,0]
-        yhat2 = YY[:,1]
-        yhat3 = YY[:,2]
+    # Predict Zinc, Cadmium, and Arsenic
+    yhat1 = YY[:,0]
+    yhat2 = YY[:,1]
+    yhat3 = YY[:,2]
 
-        # Convert predictions back to the original scale
-        Zinc_real = (yhat1 + 1) * (80.0 - 0.0) * 0.5 + 0.0  # min=0, max=80 for Zinc
-        Cadmium_real = (yhat2 + 1) * (1.4 - 0.0) * 0.5 + 0.0  # min=0, max=1.4 for Cadmium
-        Arsenic_real = (yhat3 + 1) * (10.0 - 0.0) * 0.5 + 0.0  # min=0, max=10 for Arsenic
+    # Convert predictions back to the original scale
+    Zinc_real = (yhat1 + 1) * (80.0 - 0.0) * 0.5 + 0.0  # min=0, max=80 for Zinc
+    Cadmium_real = (yhat2 + 1) * (1.4 - 0.0) * 0.5 + 0.0  # min=0, max=1.4 for Cadmium
+    Arsenic_real = (yhat3 + 1) * (10.0 - 0.0) * 0.5 + 0.0  # min=0, max=10 for Arsenic
 
-        # Display predictions
-        st.write("Zinc (mg/kg): ", np.round(Zinc_real, decimals=4))
-        st.write("Cadmium (mg/kg): ", np.round(Cadmium_real, decimals=4))
-        st.write("Arsenic (mg/kg): ", np.round(Arsenic_real, decimals=4))
+    # Display predictions
+    st.write("Zinc (mg/kg): ", np.round(Zinc_real, decimals=4))
+    st.write("Cadmium (mg/kg): ", np.round(Cadmium_real, decimals=4))
+    st.write("Arsenic (mg/kg): ", np.round(Arsenic_real, decimals=4))
 
 
 filename7 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture3.PNG'
