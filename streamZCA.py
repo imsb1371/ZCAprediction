@@ -176,20 +176,20 @@ if st.button('Run'):
         YY = stacked_prediction(members,  input_values)
 
 
-    # Predict Zinc, Cadmium, and Arsenic
-    yhat1 = YY[0]
-    yhat2 = YY[1]
-    yhat3 = YY[2]
+        # Predict Zinc, Cadmium, and Arsenic
+        yhat1 = YY[0]
+        yhat2 = YY[1]
+        yhat3 = YY[2]
 
-    # Convert predictions back to the original scale
-    Zinc_real = (yhat1 + 1) * (80.0 - 0.0) * 0.5 + 0.0  # min=0, max=80 for Zinc
-    Cadmium_real = (yhat2 + 1) * (1.4 - 0.0) * 0.5 + 0.0  # min=0, max=1.4 for Cadmium
-    Arsenic_real = (yhat3 + 1) * (10.0 - 0.0) * 0.5 + 0.0  # min=0, max=10 for Arsenic
+        # Convert predictions back to the original scale
+        Zinc_real = (yhat1 + 1) * (80.0 - 0.0) * 0.5 + 0.0  # min=0, max=80 for Zinc
+        Cadmium_real = (yhat2 + 1) * (1.4 - 0.0) * 0.5 + 0.0  # min=0, max=1.4 for Cadmium
+        Arsenic_real = (yhat3 + 1) * (10.0 - 0.0) * 0.5 + 0.0  # min=0, max=10 for Arsenic
 
-    # Display predictions
-    st.write("Zinc (mg/kg): ", np.round(Zinc_real, decimals=4))
-    st.write("Cadmium (mg/kg): ", np.round(Cadmium_real, decimals=4))
-    st.write("Arsenic (mg/kg): ", np.round(Arsenic_real, decimals=4))
+        # Display predictions
+        st.write("Zinc (mg/kg): ", np.round(Zinc_real, decimals=4))
+        st.write("Cadmium (mg/kg): ", np.round(Cadmium_real, decimals=4))
+        st.write("Arsenic (mg/kg): ", np.round(Arsenic_real, decimals=4))
 
 
 filename7 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture3.PNG'
