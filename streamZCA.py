@@ -151,7 +151,7 @@ if st.button('Run'):
         # print(f'Stacked dataset shape: {stackedX.shape}')  # Debugging line
         # print('stacked_prediction is called')  # Debugging line
         # make a prediction
-        yhat = model.predict(stackedX)
+        yhat = members[0].predict(stackedX)
         yhatpd = pd.DataFrame(yhat)
 
         return yhat
