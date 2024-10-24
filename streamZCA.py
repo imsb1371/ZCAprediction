@@ -198,15 +198,15 @@ if st.button('Run'):
 filename7 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture3.PNG'
 filename8 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture4.PNG'
 
+col22, col23, col24 = st.columns(3)
+with col22:
+    with st.container():
+        st.header("Developer:")
+        st.image(filename8)
 
-with st.container():
-    st.header("Developer:")
+with col24:
+    with st.container():
+        st.header("Supervisor:")
+        st.image(filename7) 
 
-    st.image(filename8)
- 
 
-
-with st.container():
-    st.header("Supervisor:")
-
-    st.image(filename7)
