@@ -8,9 +8,9 @@ import   streamlit  as st; from PIL import Image; import numpy  as np
 import pandas  as pd; import pickle
 
 import os
-
-filename1 = 'https://raw.githubusercontent.com/msbearthquake/TUHPC/main/Capture1.PNG'
-filename2 = 'https://raw.githubusercontent.com/msbearthquake/TUHPC/main/Capture2.PNG'
+https://github.com/imsb1371/ZCAprediction/blob/main/
+filename1 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture1.PNG'
+filename2 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture2.PNG'
 
 st.title('Tensile behavior of UHPC  ')
 with st.container():
@@ -110,7 +110,7 @@ inputvec = np.array([FA_tval, OM_tval, RL_tval, AR_tval, MT_tval, AWC_tval, Clay
 # Load models and predict the outputs when the button is pressed
 if st.button('Run'):
     ## load model
-    model2 = joblib.load('SSE_RF.pkl')
+    # model2 = joblib.load('SSE_RF.pkl')
 
 
     # load models from file
@@ -180,8 +180,8 @@ if st.button('Run'):
     st.write("Arsenic (mg/kg): ", np.round(Arsenic_real, decimals=4))
 
 
-filename7 = 'https://raw.githubusercontent.com/msbearthquake/TUHPC/main/Capture3.PNG'
-filename8 = 'https://raw.githubusercontent.com/msbearthquake/TUHPC/main/Capture4.PNG'
+filename7 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture3.PNG'
+filename8 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture4.PNG'
 
 
 with st.container():
