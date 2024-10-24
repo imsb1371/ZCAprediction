@@ -177,7 +177,6 @@ if st.button('Run'):
 
 
     # Predict Zinc, Cadmium, and Arsenic
-    st.write(YY.shape)
     yhat1 = YY[0]
     yhat2 = YY[1]
     yhat3 = YY[2]
