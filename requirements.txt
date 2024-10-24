@@ -5,4 +5,4 @@ tensorflow==2.17.0
 Pillow
 pickle
 scikit-learn==1.5.0
-joblib=1.4.2
+joblib==1.4.2
