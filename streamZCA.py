@@ -145,7 +145,7 @@ if st.button('Run'):
             # print("Final stacked shape: ", newstackX.shape)
             return newstackX
 
-    def stacked_prediction(members, model, inputX ):
+    def stacked_prediction(members, inputX ):
         # create dataset using ensemble
         stackedX = stacked_dataset(members, inputX)
         # print(f'Stacked dataset shape: {stackedX.shape}')  # Debugging line
@@ -161,7 +161,8 @@ if st.button('Run'):
     members = load_all_models(n_members, Cbij)
 
     input_values = inputvec.reshape(1,inputvec.shape[0],1 ) # Assuming trainx is loaded
-    YY = stacked_prediction(members, model2, input_values)
+    # YY = stacked_prediction(members, model2, input_values)
+    YY = stacked_prediction(members,  input_values)
 
 
     # Predict Zinc, Cadmium, and Arsenic
