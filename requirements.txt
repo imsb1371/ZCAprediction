@@ -1,8 +1,9 @@
 
-numpy==1.23.5
+numpy==1.26.0
 pandas==1.5.3
 tensorflow==2.17.0
 Pillow
 pickle
+distutils
 scikit-learn==1.5.0
 joblib==1.4.2
