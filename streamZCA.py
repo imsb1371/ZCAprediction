@@ -12,13 +12,11 @@ import os
 filename1 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture1.PNG'
 filename2 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture2.PNG'
 
-st.title('Tensile behavior of UHPC  ')
+st.title('Predicting Zinc, Cadmium, and Arsenic Levels in European Soils')
 with st.container():
     st.image(filename1)
     st.image(filename2)
 
-
-st.title('Predicting Zinc, Cadmium, and Arsenic Levels in European Soils')
 
 # Arrange input boxes into three columns for input features
 col1, col2, col3 = st.columns(3)
@@ -147,11 +145,11 @@ if st.button('Run'):
 
     def stacked_prediction(members, inputX ):
         # create dataset using ensemble
-        stackedX = stacked_dataset(members, inputX)
+        # stackedX = stacked_dataset(members, inputX)
         # print(f'Stacked dataset shape: {stackedX.shape}')  # Debugging line
         # print('stacked_prediction is called')  # Debugging line
         # make a prediction
-        yhat = members[0].predict(stackedX)
+        yhat = members[0].predict(inputX)
         yhatpd = pd.DataFrame(yhat)
 
         return yhat
