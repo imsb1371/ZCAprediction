@@ -34,7 +34,7 @@ col4, col5, col6 = st.columns(3)
 with col4:
     AR = st.number_input('Annual Rainfall (AR, mm/year)', 0.0)
 with col5:
-    MT = st.number_input('Mean Temperature (MT, C)', -7.5)
+    MT = st.number_input('Mean Temperature (MT, C)', 0.0)
 with col6:
     AWC = st.number_input('Available Water Capacity (AWC)', 0.0)
 
@@ -76,6 +76,10 @@ with col18:
 col19, col20 = st.columns(2)
 with col19:
     CN = st.number_input('Carbon to Nitrogen Ratio (CN)', 0.0)
+
+# Gather all inputs into a list to check how many are zero
+input_values = [FA, OM, RL, AR, MT, AWC, Clay, Silt, Sand, Cfrag, BD, Phosphorus,
+                Potassium, Nitrogen, CEC, CaCO3, pH_H2O, CN]
 
 # Normalize the input values based on min and max values
 FA_tval = (2 * (FA - 0) / (20623310.0 - 0)) - 1
