@@ -8,7 +8,7 @@ import   streamlit  as st; from PIL import Image; import numpy  as np
 import pandas  as pd; import pickle
 
 import os
-https://github.com/imsb1371/ZCAprediction/blob/main/
+
 filename1 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture1.PNG'
 filename2 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture2.PNG'
 
