@@ -210,3 +210,22 @@ with col23:
         st.image(filename7) 
 
 
+footer = """
+    <style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #f1f1f1;
+        color: black;
+        text-align: center;
+        padding: 10px;
+        font-size: 12px;
+    }
+    </style>
+    <div class="footer">
+    This web app was developed in School of Resources and Safety Engineering, Central South University, Changsha 410083, China
+    </div>
+"""
+st.markdown(footer, unsafe_allow_html=True)
