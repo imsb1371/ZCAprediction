@@ -115,9 +115,9 @@ zero_count = sum(1 for value in input_values if value == 0)
 # Load models and predict the outputs when the button is pressed
 if st.button('Run'):
 
-     ## Validation: If more than 5 inputs are zero, show a warning message
+     ## Validation: If more than 3 inputs are zero, show a warning message
     if zero_count > 3:
-        st.error(f"Error: More than five input values are zero. Please provide valid inputs for at least 15 features.")
+        st.error(f"Error: More than three input values are zero. Please provide valid inputs for at least 15 features.")
     else:
 
         ## load model
