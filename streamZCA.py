@@ -25,7 +25,8 @@ col1, col2, col3 = st.columns(3)
 with col1:
     FA = st.number_input('Farming Area (FA, ha)', 0.0)
 with col2:
-    OM = st.number_input('Operating Mine (OM)', 0.0)
+    OM = st.selectbox('Operating Mine (OM)', [0, 1], help="0: Inactive, 1: Active")
+
 with col3:
     RL = st.number_input('Road Length (RL, km)', 0.0)
 
